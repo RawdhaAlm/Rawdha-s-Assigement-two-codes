@@ -1,0 +1,123 @@
+class EBook:
+    """
+    EBook class represents a book in the e-book store.
+    Attributes include title, author, publicationDate, genre, and price.
+    """
+
+    def __init__(self, title, author, publication_date, genre, price):
+        # Initialize all the attributes of the EBook class
+        self._title = title
+        self._author = author
+        self._publication_date = publication_date
+        self._genre = genre
+        self._price = price
+
+    # Getters and Setters for title
+    def get_title(self):
+        """Get the title of the e-book"""
+        return self._title
+
+    def set_title(self, title):
+        """Set the title of the e-book"""
+        self._title = title
+
+    # Getters and Setters for author
+    def get_author(self):
+        """Get the author of the e-book"""
+        return self._author
+
+    def set_author(self, author):
+        """Set the author of the e-book"""
+        self._author = author
+
+    # Getters and Setters for publication date
+    def get_publication_date(self):
+        """Get the publication date of the e-book"""
+        return self._publication_date
+
+    def set_publication_date(self, publication_date):
+        """Set the publication date of the e-book"""
+        self._publication_date = publication_date
+
+    # Getters and Setters for genre
+    def get_genre(self):
+        """Get the genre of the e-book"""
+        return self._genre
+
+    def set_genre(self, genre):
+        """Set the genre of the e-book"""
+        self._genre = genre
+
+    # Getters and Setters for price
+    def get_price(self):
+        """Get the price of the e-book"""
+        return self._price
+
+    def set_price(self, price):
+        """Set the price of the e-book"""
+        self._price = price
+
+    # Extra methods based on the UML diagram
+    def get_details(self):
+        """Return a string with all details of the e-book"""
+        return f"Title: {self._title}, Author: {self._author}, Published: {self._publication_date}, Genre: {self._genre}, Price: ${self._price:.2f}"
+
+    def update_price(self, new_price):
+        """Update the price of the e-book"""
+        self._price = new_price
+
+    # Relationships (as comments in code)
+
+    # Association with Customer:
+    # Customers interact with e-books by browsing and purchasing.
+    # This is represented as a simple association and does not require 
+    # additional code here, as the interaction is external to this class.
+
+    # Composition with ShoppingCart:
+    # E-books are part of a shopping cart, meaning that an instance of EBook exists
+    # within the ShoppingCart during a purchase session.
+    # Implemented in ShoppingCart (external to this class).
+
+    # Aggregation with Order:
+    # E-books are aggregated into an Order upon purchase.
+    # Implemented in Order (external to this class).
+
+    # Testing helper methods (for creating, updating, and deleting)
+    
+    def create_ebook(self, title, author, publication_date, genre, price):
+        """Creates an e-book instance with the provided details"""
+        return EBook(title, author, publication_date, genre, price)
+
+    def update_ebook(self, title=None, author=None, publication_date=None, genre=None, price=None):
+        """Update details of the e-book"""
+        if title is not None:
+            self.set_title(title)
+        if author is not None:
+            self.set_author(author)
+        if publication_date is not None:
+            self.set_publication_date(publication_date)
+        if genre is not None:
+            self.set_genre(genre)
+        if price is not None:
+            self.set_price(price)
+
+    def delete_ebook(self):
+        """Delete the e-book instance (for testing purposes)"""
+        del self
+
+# Example of how to use the class for testing
+if __name__ == "__main__":
+    # Creating an e-book instance
+    ebook1 = EBook("Sample Book", "Author Name", "2023-11-08", "Fiction", 10.99)
+    print(ebook1.get_details())
+
+    # Updating the e-book price
+    ebook1.update_price(12.99)
+    print("After updating price:", ebook1.get_details())
+
+    # Updating multiple attributes
+    ebook1.update_ebook(title="Updated Book", genre="Drama")
+    print("After updating title and genre:", ebook1.get_details())
+    
+    # Deleting the e-book instance (testing cleanup)
+    ebook1.delete_ebook()
