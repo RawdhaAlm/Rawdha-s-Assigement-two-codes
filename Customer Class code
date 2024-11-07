@@ -1,0 +1,132 @@
+class Customer:
+    """
+    Customer class represents a customer in the e-book store.
+    Attributes:
+        name (str): The customer's name.
+        email (str): The customer's email address.
+        contact_number (str): The customer's contact number.
+        loyalty_member (bool): Indicates if the customer is a loyalty program member.
+        address (str): The customer's address.
+    Relationships:
+        - Association with Discount (directed association):
+          Customers can access discounts based on their eligibility.
+    """
+
+    def __init__(self, name, email, contact_number, loyalty_member=False, address=""):
+        """Constructor to initialize Customer attributes."""
+        self._name = name
+        self._email = email
+        self._contact_number = contact_number
+        self._loyalty_member = loyalty_member
+        self._address = address
+
+    # Getters and Setters for each attribute
+    def get_name(self):
+        """Get the name of the customer."""
+        return self._name
+
+    def set_name(self, name):
+        """Set the name of the customer."""
+        self._name = name
+
+    def get_email(self):
+        """Get the email of the customer."""
+        return self._email
+
+    def set_email(self, email):
+        """Set the email of the customer."""
+        self._email = email
+
+    def get_contact_number(self):
+        """Get the contact number of the customer."""
+        return self._contact_number
+
+    def set_contact_number(self, contact):
+        """Set the contact number of the customer."""
+        self._contact_number = contact
+
+    def is_loyalty_member(self):
+        """Check if the customer is a loyalty member."""
+        return self._loyalty_member
+
+    def set_loyalty_member(self, member):
+        """Set the loyalty member status of the customer."""
+        self._loyalty_member = member
+
+    def get_address(self):
+        """Get the address of the customer."""
+        return self._address
+
+    def set_address(self, address):
+        """Set the address of the customer."""
+        self._address = address
+
+    # Extra methods based on the UML diagram
+    def create_account(self):
+        """
+        Simulates account creation. In a real application,
+        this would save customer data to a database.
+        """
+        return f"Account created for {self._name}."
+
+    def update_account(self, name=None, email=None, contact=None, address=None):
+        """
+        Updates customer account information.
+        Allows partial updates by checking each parameter.
+        """
+        if name:
+            self.set_name(name)
+        if email:
+            self.set_email(email)
+        if contact:
+            self.set_contact_number(contact)
+        if address:
+            self.set_address(address)
+        return f"Account updated for {self._name}."
+
+    def delete_account(self):
+        """
+        Simulates account deletion. In a real application,
+        this would remove the customer data from a database.
+        """
+        return f"Account deleted for {self._name}."
+
+    # Methods to demonstrate association with Discount
+    def apply_discount(self, discount):
+        """
+        Applies a discount based on the customer's eligibility.
+        Assumes 'discount' is an instance of the Discount class.
+        """
+        if self._loyalty_member or discount.is_bulk_discount_eligible():
+            return f"Discount applied for {self._name}."
+        return "No discount available for this customer."
+
+# Example usage and testing relationships
+if __name__ == "__main__":
+    # Create a Customer instance
+    customer = Customer("Alice", "alice@example.com", "123-456-7890", True, "24 Alabal St")
+
+    # Test getters
+    print(customer.get_name())         # Output: Rawdha
+    print(customer.get_email())        # Output: rawdha256@gmaul.com
+    print(customer.get_contact_number())  # Output: 0554788002
+    print(customer.is_loyalty_member())  # Output: True
+    print(customer.get_address())      # Output: 24 Alabal street
+
+    # Test setters
+    customer.set_name("Rawdha Almarzooqi")
+    customer.set_email("rawdhamohamed@gmail.com")
+    customer.set_contact_number("0505115001")
+    customer.set_loyalty_member(False)
+    customer.set_address("7 bateen St")
+    print(customer.get_name())         # Output: Rawdha Almarzooqi
+    print(customer.get_email())        # Output: rawdhamohamed@gmail.com
+    print(customer.get_contact_number())  # Output: 0505115001
+    print(customer.is_loyalty_member())  # Output: False
+    print(customer.get_address())      # Output: 7 bateen St
+
+    # Test extra methods
+    print(customer.create_account())   # Output: Account created for Rawdha Almarzooqi.
+    print(customer.update_account(name="Rawdha Ahmed", address="8 almanhal St"))
+    # Output: Account updated for Alice Ahmed.
+    print(customer.delete_account())   # Output: Account deleted for Alice Ahmed.
